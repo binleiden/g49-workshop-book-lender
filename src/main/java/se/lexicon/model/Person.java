@@ -86,23 +86,23 @@ public class Person {
         // If book is not null
         // Create a new array to store the updated list of borrowed books
         Book[] newArray = new Book[borrowedBooks.length - 1]; // Create a new array with size one less than the current borrowedBooks array
-        int counter = 0; // Counter to track the index of the new array
+        int newArrayIndex = 0; // Index for the new array
 
-        // Iterate through the borrowedBooks array
-        for (Book elementArray : borrowedBooks) { // Loop through each book in the borrowedBooks array
+        // Iterate through the borrowedBooks array using a normal for loop
+        for (int i = 0; i < borrowedBooks.length; i++) { // Loop through each book in the borrowedBooks array
             // Check if the ID of the current book matches the ID of the book being returned
-            if (elementArray.getId().equals(book.getId())) { // If the ID of the current book matches the ID of the book being returned
+            if (borrowedBooks[i].getId().equals(book.getId())) { // If the ID of the current book matches the ID of the book being returned
                 book.setBorrower(null); // Reset the borrower of the returned book to null
                 continue; // Skip adding the returned book to the new array
             }
             // If the IDs do not match, add the current book to the new array
-            newArray[counter++] = elementArray; // Add the current book to the new array and increment the counter
+            newArray[newArrayIndex] = borrowedBooks[i]; // Add the current book to the new array
+            newArrayIndex++; // Increment the index of the new array
         }
 
         // Update the borrowedBooks array to the new array
         borrowedBooks = newArray; // Assign the new array back to the borrowedBooks array, effectively removing the returned book
     }
-
     public void displayInfo() {
         System.out.println(getPersonInformation());
     }
