@@ -6,6 +6,7 @@ import se.lexicon.model.Person;
 
 public class App {
     public static void main(String[] args) {
+
         // Create a book instance
         Book book1 = new Book("Learn how to fly", "John Carter");
         Book book2 = new Book("100 things to do", "Ragnar Svennson");
@@ -20,7 +21,6 @@ public class App {
         Person person1 = new Person("Daniel", "Petersson");
 
         // Display person information
-        //System.out.println("Person information:");
         System.out.println(person1.getPersonInformation());
         System.out.println();
 
