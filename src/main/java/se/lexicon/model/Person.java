@@ -12,8 +12,8 @@ public class Person {
 
     public Person(String firstName, String lastName) {
         this.id= getNextId();
-        this.firstName = firstName;
-        this.lastName = lastName;
+        setFirstName(firstName);
+        setLastName(lastName);
     }
     private static int getNextId(){
         return ++sequencer;
@@ -23,10 +23,16 @@ public class Person {
     //Setters
 
     public void setFirstName(String firstName) {
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Firstname cannot be null or empty");
+        }
         this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("LastName cannot be null or empty");
+        }
         this.lastName = lastName;
     }
 
