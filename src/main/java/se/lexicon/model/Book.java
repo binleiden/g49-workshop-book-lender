@@ -1,7 +1,8 @@
 package se.lexicon.model;
 
+import java.util.UUID;
+
 public class Book {
-    // todo: needs completion
     // Fields
     private String id;
     private String title;
@@ -11,23 +12,31 @@ public class Book {
     //Constructors
 
     public Book(String title, String author) {
-        this.title = title;
-        this.author = author;
+        this.id = generateBookId();
+        setAuthor(title);
+        setTitle(title);
+        setBorrower(null);
     }
 
     public Book(String title, String author, Person borrower) {
-        this.title = title;
-        this.author = author;
+        this(title, author);
+        this.id = generateBookId();
         setBorrower(borrower);
     }
 
     //Setters
 
     public void setTitle(String title) {
+        if (title == null || title.trim().isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be null or empty");
+        }
         this.title = title;
     }
 
     public void setAuthor(String author) {
+        if (author == null || author.trim().isEmpty()) {
+            throw new IllegalArgumentException("Author cannot be null or empty");
+        }
         this.author = author;
     }
 
@@ -37,10 +46,15 @@ public class Book {
 
     public void setBorrower(Person borrower) {
         this.borrower = borrower;
-        this.available = false;
+        this.available = (borrower == null);
+
     }
 
     //Getters
+
+    public String getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;
@@ -50,7 +64,7 @@ public class Book {
         return author;
     }
 
-    public Boolean getAvailable() {
+    public Boolean isAvailable() {
         return available;
     }
 
@@ -59,9 +73,19 @@ public class Book {
     }
 
     //Methods
-    public String getBookInformation(){
-        return "ID: " + id + "\n" +
-                "Author: " + author +", Title: " + title+  ", Avileble: " + available+ ", Borrower: " + borrower.getPersonInformation();
+    public String getBookInformation() {
 
+        String bookInfo = "BookInformation" +"\n" +"ID: " + id + "\n" +"Title: " + title +"\n" + "Available: " + available+"\n";
+        if (borrower == null) {
+            bookInfo = bookInfo + "Not borrowed" +"\n";
+        } else {
+            bookInfo = bookInfo + "Borrower" + borrower.getPersonInformation()+"\n";
+        }
+
+        return bookInfo;
+    }
+
+    private String generateBookId() {
+        return UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
 }
