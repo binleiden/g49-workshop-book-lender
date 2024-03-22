@@ -13,7 +13,7 @@ public class Book {
 
     public Book(String title, String author) {
         this.id = generateBookId();
-        setAuthor(title);
+        setAuthor(author);
         setTitle(title);
         setBorrower(null);
     }
@@ -66,7 +66,7 @@ public class Book {
 
     public Boolean isAvailable() {
         return available;
-    }
+    } //Boolean use is insted of set and get.
 
     public Person getBorrower() {
         return borrower;

@@ -26,6 +26,7 @@ public class App {
 
         // Loan a book to the person
         person1.loanBook(book1);
+        person1.loanBook(book2);
 
         // Display person information after borrowing a book
         System.out.println("Information after borrowing a book:");
